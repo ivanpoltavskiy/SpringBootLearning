@@ -30,6 +30,9 @@ public class PriorityController {
         if (priority.getTitle() == null || priority.getTitle().trim().length() == 0){
             return new ResponseEntity("Title cannot be null", HttpStatus. NOT_ACCEPTABLE);
         }
+        if (priority.getColor() == null || priority.getColor().trim().length() == 0){
+            return new ResponseEntity("Color cannot be null", HttpStatus. NOT_ACCEPTABLE);
+        }
         return ResponseEntity.ok(priorityRepository.save(priority));
     }
 
