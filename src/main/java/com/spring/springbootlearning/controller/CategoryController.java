@@ -20,7 +20,7 @@ public class CategoryController {
 
     @GetMapping
     public List<Category> categories(){
-        return categoryRepository.findAll();
+        return categoryRepository.findAllByOrderByIdAsc();
     }
 
     @PostMapping("/add")
