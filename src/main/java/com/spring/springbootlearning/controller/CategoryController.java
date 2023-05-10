@@ -3,6 +3,7 @@ package com.spring.springbootlearning.controller;
 import com.spring.springbootlearning.entity.Category;
 import com.spring.springbootlearning.entity.Priority;
 import com.spring.springbootlearning.repository.CategoryRepository;
+import com.spring.springbootlearning.search.CategorySearchValues;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -66,5 +67,11 @@ public class CategoryController {
             return new ResponseEntity("id = "+id+" not found!", HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity(HttpStatus.OK);
+    }
+    @PostMapping("/search")
+    public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues){
+
+        return ResponseEntity.ok(categoryRepository.findByTitle(categorySearchValues.getText()));
+
     }
 }
