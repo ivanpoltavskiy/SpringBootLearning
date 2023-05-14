@@ -16,6 +16,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "(:priorityId is null or p.priority.id = :priorityId) and"+
             "(:categoryId is null or p.category.id = :categoryId)"
     )
-    List<Task> findByParams(@Param("title") String title, @Param("completed") Integer completed, @Param("priorityId") Long priorityId, @Param("categoryId") Long categoryId);
+    List<Task> findByParams(@Param("title") String title,
+                            @Param("completed") Integer completed,
+                            @Param("priorityId") Long priorityId,
+                            @Param("categoryId") Long categoryId);
 
 }

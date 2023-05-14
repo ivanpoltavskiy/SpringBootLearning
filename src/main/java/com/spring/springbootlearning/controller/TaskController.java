@@ -20,51 +20,51 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping()
-    public ResponseEntity<List<Task>> tasks(){
+    public ResponseEntity<List<Task>> tasks() {
         return ResponseEntity.ok(taskRepository.findAll());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Task> add (@RequestBody Task task){
-        if (task.getId() !=null && task.getId() != 0){
+    public ResponseEntity<Task> add(@RequestBody Task task) {
+        if (task.getId() != null && task.getId() != 0) {
             return new ResponseEntity("ID should be null", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (task.getTitle() == null || task.getTitle().trim().length() == 0){
-            return new ResponseEntity("Title cannot be null", HttpStatus. NOT_ACCEPTABLE);
+        if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
+            return new ResponseEntity("Title cannot be null", HttpStatus.NOT_ACCEPTABLE);
         }
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Task> update (@RequestBody Task task){
-        if (task.getId() ==null && task.getId() == 0){
+    public ResponseEntity<Task> update(@RequestBody Task task) {
+        if (task.getId() == null && task.getId() == 0) {
             return new ResponseEntity("ID should not be null", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (task.getTitle() == null || task.getTitle().trim().length() == 0){
-            return new ResponseEntity("Title cannot be null", HttpStatus. NOT_ACCEPTABLE);
+        if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
+            return new ResponseEntity("Title cannot be null", HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<Task> findById(@PathVariable Long id){
+    public ResponseEntity<Task> findById(@PathVariable Long id) {
         Task task = null;
-        try{
+        try {
             task = taskRepository.findById(id).get();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
-            return new ResponseEntity("id = "+id+" not found!", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity("id = " + id + " not found!", HttpStatus.NOT_ACCEPTABLE);
         }
         return ResponseEntity.ok(task);
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Task> deleteById(@PathVariable Long id){
+    public ResponseEntity<Task> deleteById(@PathVariable Long id) {
         try {
             taskRepository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            return new ResponseEntity("id = "+id+" not found!", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity("id = " + id + " not found!", HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
