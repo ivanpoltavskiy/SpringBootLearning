@@ -2,6 +2,7 @@ package com.spring.springbootlearning.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.sql.Date;
 
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Task {
@@ -31,33 +33,5 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Integer getCompleted() {
-        return completed;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
 
 }

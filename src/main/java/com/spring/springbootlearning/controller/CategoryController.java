@@ -1,77 +1,52 @@
 package com.spring.springbootlearning.controller;
 
+import com.spring.springbootlearning.dto.request.category.CategoryCreateRequest;
+import com.spring.springbootlearning.dto.response.category.CategoryResponse;
 import com.spring.springbootlearning.entity.Category;
-import com.spring.springbootlearning.entity.Priority;
-import com.spring.springbootlearning.repository.CategoryRepository;
+import com.spring.springbootlearning.mapper.CategoryMapperImpl;
 import com.spring.springbootlearning.search.CategorySearchValues;
+import com.spring.springbootlearning.service.CategoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/category")
 public class CategoryController {
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
+    private CategoryMapperImpl categoryMapper;
 
     @GetMapping
-    public List<Category> categories(){
-        return categoryRepository.findAllByOrderByIdAsc();
+    public List<CategoryResponse> categories() {
+        return categoryService.categories().stream().map(categoryMapper::toDto).toList();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Category> add (@RequestBody Category category){
-        if (category.getId() !=null && category.getId() != 0){
-            return new ResponseEntity("ID should be null", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (category.getTitle() == null || category.getTitle().trim().length() == 0){
-            return new ResponseEntity("Title cannot be null", HttpStatus. NOT_ACCEPTABLE);
-        }
-        return ResponseEntity.ok(categoryRepository.save(category));
+    public CategoryResponse add(@RequestBody CategoryCreateRequest categoryDto) {
+        return categoryMapper.toDto(categoryService.add(categoryMapper.fromDto(categoryDto)));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Category> update (@RequestBody Category category){
-        if (category.getId() ==null && category.getId() == 0){
-            return new ResponseEntity("ID should not be null", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (category.getTitle() == null || category.getTitle().trim().length() == 0){
-            return new ResponseEntity("Title cannot be null", HttpStatus. NOT_ACCEPTABLE);
-        }
-        return ResponseEntity.ok(categoryRepository.save(category));
+    public CategoryResponse update(@RequestBody CategoryCreateRequest categoryDto) {
+        return categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryDto)));
     }
 
-    @GetMapping("id/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id){
-        Category category = null;
-        try{
-            category = categoryRepository.findById(id).get();
-        } catch (NoSuchElementException e){
-            e.printStackTrace();
-            return new ResponseEntity("id = "+id+" not found!", HttpStatus.NOT_ACCEPTABLE);
-        }
-        return ResponseEntity.ok(category);
+    @GetMapping("/{id}")
+    public CategoryResponse findById(@PathVariable Long id) {
+        return categoryMapper.toDto(categoryService.findById(id));
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Category> deleteById(@PathVariable Long id){
-        try {
-             categoryRepository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException e){
-            e.printStackTrace();
-            return new ResponseEntity("id = "+id+" not found!", HttpStatus.NOT_ACCEPTABLE);
-        }
-        return new ResponseEntity(HttpStatus.OK);
-    }
-    @PostMapping("/search")
-    public ResponseEntity<List<Category>> search(@RequestBody CategorySearchValues categorySearchValues){
+    public void deleteById(@PathVariable Long id) {
+        categoryService.deleteById(id);
 
-        return ResponseEntity.ok(categoryRepository.findByTitle(categorySearchValues.getText()));
+    }
+
+    @PostMapping("/search")
+    public List<Category> search(@RequestBody CategorySearchValues categorySearchValues) {
+        return categoryService.search(categorySearchValues);
 
     }
 }

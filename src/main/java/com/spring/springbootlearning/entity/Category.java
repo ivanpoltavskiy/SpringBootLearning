@@ -7,7 +7,8 @@ import lombok.Setter;
 
 @Entity
 @EqualsAndHashCode
-@Setter@NoArgsConstructor
+@Setter
+@NoArgsConstructor
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
