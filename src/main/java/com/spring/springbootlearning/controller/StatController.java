@@ -1,7 +1,7 @@
 package com.spring.springbootlearning.controller;
 
 import com.spring.springbootlearning.entity.Stat;
-import com.spring.springbootlearning.repository.StatRepository;
+import com.spring.springbootlearning.service.StatService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/stat")
 public class StatController {
-    private final StatRepository statRepository;
+    private final StatService statService;
     private final Long defaultId = 1l;
 
     @GetMapping
     public ResponseEntity<Stat> findById(){
-        return ResponseEntity.ok(statRepository.findById(defaultId).get());
+        return ResponseEntity.ok(statService.findById(defaultId));
     }
 }

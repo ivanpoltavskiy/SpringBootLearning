@@ -1,6 +1,7 @@
 package com.spring.springbootlearning.service;
 
 import com.spring.springbootlearning.entity.Priority;
+import com.spring.springbootlearning.exceptions.PriorityNotFoundException;
 import com.spring.springbootlearning.repository.PriorityRepository;
 import com.spring.springbootlearning.search.PrioritySearchValues;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class PriorityService {
 
 
     public Priority findById(Long id) {
-        return priorityRepository.findById(id).orElseThrow(()-> new RuntimeException("Priority with id "+ id + "not found"));
+        return priorityRepository.findById(id).orElseThrow(()-> new PriorityNotFoundException("Priority with id "+ id + " not found"));
     }
 
     public void deleteById(Long id) {
@@ -46,8 +47,6 @@ public class PriorityService {
     }
 
     public List<Priority> search(PrioritySearchValues prioritySearchValues) {
-
         return priorityRepository.findByTitle(prioritySearchValues.getText());
-
     }
 }

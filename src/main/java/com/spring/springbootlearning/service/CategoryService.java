@@ -1,6 +1,7 @@
 package com.spring.springbootlearning.service;
 
 import com.spring.springbootlearning.entity.Category;
+import com.spring.springbootlearning.exceptions.CategoryNotFoundException;
 import com.spring.springbootlearning.repository.CategoryRepository;
 import com.spring.springbootlearning.search.CategorySearchValues;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class CategoryService {
 
 
     public Category findById(Long id){
-        return categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Task with id + " +id+ " not found"));
+        return categoryRepository.findById(id).orElseThrow(()->new CategoryNotFoundException("Category with id + " +id+ " not found"));
     }
 
     public void deleteById(Long id) {

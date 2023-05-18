@@ -6,7 +6,10 @@ import com.spring.springbootlearning.entity.Category;
 import com.spring.springbootlearning.mapper.CategoryMapperImpl;
 import com.spring.springbootlearning.search.CategorySearchValues;
 import com.spring.springbootlearning.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,17 +27,17 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public CategoryResponse add(@RequestBody CategoryCreateRequest categoryDto) {
-        return categoryMapper.toDto(categoryService.add(categoryMapper.fromDto(categoryDto)));
+    public ResponseEntity<CategoryResponse> add(@Valid @RequestBody CategoryCreateRequest categoryDto) {
+        return new ResponseEntity<>(categoryMapper.toDto(categoryService.add(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public CategoryResponse update(@RequestBody CategoryCreateRequest categoryDto) {
-        return categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryDto)));
+    public ResponseEntity<CategoryResponse> update(@Valid @RequestBody CategoryCreateRequest categoryDto) {
+        return new ResponseEntity<>(categoryMapper.toDto(categoryService.update(categoryMapper.fromDto(categoryDto))), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public CategoryResponse findById(@PathVariable Long id) {
+    public CategoryResponse findById(@Valid @PathVariable Long id) {
         return categoryMapper.toDto(categoryService.findById(id));
     }
 

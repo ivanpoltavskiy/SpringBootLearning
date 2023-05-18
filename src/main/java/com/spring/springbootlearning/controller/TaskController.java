@@ -6,7 +6,10 @@ import com.spring.springbootlearning.entity.Task;
 import com.spring.springbootlearning.mapper.TaskMapperImpl;
 import com.spring.springbootlearning.search.TaskSearchValues;
 import com.spring.springbootlearning.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,18 +28,18 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public TaskResponse add(@RequestBody TaskCreateRequest taskDto) {
-        return taskMapper.toDto(taskService.add(taskMapper.fromDto(taskDto)));
+    public ResponseEntity<TaskResponse> add(@Valid @RequestBody TaskCreateRequest taskDto) {
+        return new ResponseEntity<>(taskMapper.toDto(taskService.add(taskMapper.fromDto(taskDto))), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public TaskResponse update(@RequestBody TaskCreateRequest taskDto) {
-        return taskMapper.toDto(taskService.update(taskMapper.fromDto(taskDto)));
+    public ResponseEntity<TaskResponse> update(@Valid @RequestBody TaskCreateRequest taskDto) {
+        return new ResponseEntity<>(taskMapper.toDto(taskService.update(taskMapper.fromDto(taskDto))), HttpStatus.OK);
     }
 
-    @GetMapping("id/{id}")
-    public TaskResponse findById(@PathVariable Long id) {
-        return taskMapper.toDto(taskService.findById(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponse> findById(@Valid @PathVariable Long id) {
+        return new ResponseEntity<>(taskMapper.toDto(taskService.findById(id)), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

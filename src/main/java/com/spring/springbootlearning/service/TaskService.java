@@ -1,6 +1,7 @@
 package com.spring.springbootlearning.service;
 
 import com.spring.springbootlearning.entity.Task;
+import com.spring.springbootlearning.exceptions.UserNotFoundException;
 import com.spring.springbootlearning.repository.TaskRepository;
 import com.spring.springbootlearning.search.TaskSearchValues;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class TaskService {
     }
 
     public Task findById(Long id) {
-        return taskRepository.findById(id).orElseThrow(() ->new RuntimeException("Task with id "+ id+" not found"));
+        return taskRepository.findById(id).orElseThrow(() ->new UserNotFoundException("Task with id "+ id+" not found"));
     }
 
     public void deleteById(Long id) {
