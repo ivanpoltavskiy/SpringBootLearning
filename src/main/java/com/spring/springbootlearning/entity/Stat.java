@@ -24,9 +24,11 @@ public class Stat {
     public Long getId() {
         return id;
     }
+
     public Long getCompletedTotal() {
         return completedTotal;
     }
+
     public Long getUncompletedTotal() {
         return uncompletedTotal;
     }

@@ -7,7 +7,8 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@Setter@EqualsAndHashCode
+@Setter
+@EqualsAndHashCode
 public class Priority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

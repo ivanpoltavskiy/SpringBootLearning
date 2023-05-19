@@ -15,21 +15,21 @@ import java.util.List;
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
-    public List<Category> categories(){
+    public List<Category> categories() {
         return categoryRepository.findAllByOrderByIdAsc();
     }
 
-    public Category add (Category category){
+    public Category add(Category category) {
         return categoryRepository.save(category);
     }
 
-    public Category update (Category category){
+    public Category update(Category category) {
         return categoryRepository.save(category);
     }
 
 
-    public Category findById(Long id){
-        return categoryRepository.findById(id).orElseThrow(()->new CategoryNotFoundException("Category with id + " +id+ " not found"));
+    public Category findById(Long id) {
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category with id + " + id + " not found"));
     }
 
     public void deleteById(Long id) {
@@ -41,7 +41,7 @@ public class CategoryService {
 
     }
 
-    public List<Category> search(CategorySearchValues categorySearchValues){
+    public List<Category> search(CategorySearchValues categorySearchValues) {
         return categoryRepository.findByTitle(categorySearchValues.getText());
     }
 }

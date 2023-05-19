@@ -5,5 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class PriorityNotFoundException extends RuntimeException {
-    public PriorityNotFoundException(String message){super(message);}
+    public PriorityNotFoundException(String message) {
+        super(message);
+    }
 }

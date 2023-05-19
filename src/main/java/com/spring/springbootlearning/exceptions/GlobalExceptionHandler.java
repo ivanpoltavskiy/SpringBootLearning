@@ -24,6 +24,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         errorResponse.put("errors", errors);
         return errorResponse;
     }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
@@ -36,6 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(getErrorsMap(errors), status);
     }
+
     @ExceptionHandler({UserNotFoundException.class, PriorityNotFoundException.class, CategoryNotFoundException.class})
     public ResponseEntity<Map<String, List<String>>> handleNotFoundException(RuntimeException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());

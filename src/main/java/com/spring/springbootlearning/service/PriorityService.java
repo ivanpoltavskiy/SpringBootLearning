@@ -17,7 +17,6 @@ public class PriorityService {
     private PriorityRepository priorityRepository;
 
 
-
     public List<Priority> priorities() {
         return priorityRepository.findAllByOrderByIdAsc();
     }
@@ -34,14 +33,13 @@ public class PriorityService {
 
 
     public Priority findById(Long id) {
-        return priorityRepository.findById(id).orElseThrow(()-> new PriorityNotFoundException("Priority with id "+ id + " not found"));
+        return priorityRepository.findById(id).orElseThrow(() -> new PriorityNotFoundException("Priority with id " + id + " not found"));
     }
 
     public void deleteById(Long id) {
         try {
             priorityRepository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
         }
     }

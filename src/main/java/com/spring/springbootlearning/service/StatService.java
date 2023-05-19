@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 
 public class StatService {
     StatRepository statRepository;
-    public Stat findById(Long id){
+
+    public Stat findById(Long id) {
         return statRepository.findById(id).get();
     }
 }
