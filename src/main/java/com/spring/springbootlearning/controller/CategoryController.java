@@ -6,12 +6,12 @@ import com.spring.springbootlearning.entity.Category;
 import com.spring.springbootlearning.mapper.CategoryMapperImpl;
 import com.spring.springbootlearning.search.CategorySearchValues;
 import com.spring.springbootlearning.service.CategoryService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController

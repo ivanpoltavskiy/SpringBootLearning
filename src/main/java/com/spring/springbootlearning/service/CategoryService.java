@@ -29,7 +29,7 @@ public class CategoryService {
 
 
     public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category with id + " + id + " not found"));
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category with id  " + id + " not found"));
     }
 
     public void deleteById(Long id) {

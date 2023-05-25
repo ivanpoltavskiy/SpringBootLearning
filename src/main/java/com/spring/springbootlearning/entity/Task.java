@@ -1,11 +1,12 @@
 package com.spring.springbootlearning.entity;
 
-import jakarta.persistence.*;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -33,5 +34,8 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private User user;
 
 }

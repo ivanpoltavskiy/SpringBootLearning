@@ -6,12 +6,12 @@ import com.spring.springbootlearning.entity.Priority;
 import com.spring.springbootlearning.mapper.PriorityMapperImpl;
 import com.spring.springbootlearning.search.PrioritySearchValues;
 import com.spring.springbootlearning.service.PriorityService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor

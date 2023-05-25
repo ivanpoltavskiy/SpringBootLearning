@@ -2,13 +2,11 @@ package com.spring.springbootlearning.dto.request.task;
 
 import com.spring.springbootlearning.entity.Category;
 import com.spring.springbootlearning.entity.Priority;
-import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+import javax.validation.constraints.*;
 import java.sql.Date;
-@Getter
-@Setter
+@Data
 public class TaskCreateRequest {
     private Long id;
 

@@ -2,14 +2,12 @@ package com.spring.springbootlearning.dto.response.task;
 
 import com.spring.springbootlearning.entity.Category;
 import com.spring.springbootlearning.entity.Priority;
-import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+import javax.validation.constraints.*;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 public class TaskResponse {
     private Long id;
     @NotBlank(message = "Title cannot be null")

@@ -1,9 +1,11 @@
 package com.spring.springbootlearning.entity;
 
-import jakarta.persistence.*;
+
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
