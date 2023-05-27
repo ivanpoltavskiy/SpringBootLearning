@@ -31,14 +31,6 @@ public class TaskService {
         return taskRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Task with id " + id + " not found"));
     }
 
-    public void deleteById(Long id) {
-        try {
-            taskRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Task> search(TaskSearchValues taskSearchValues) {
 
         String title = taskSearchValues.getTitle() != null ? taskSearchValues.getTitle() : null;
@@ -47,6 +39,13 @@ public class TaskService {
         Long categoryId = taskSearchValues.getCategoryId() != null ? taskSearchValues.getCategoryId() : null;
 
         return taskRepository.findByParams(title, completed, priorityID, categoryId);
+    }
 
+    public void deleteById(Long id) {
+        try {
+            taskRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
