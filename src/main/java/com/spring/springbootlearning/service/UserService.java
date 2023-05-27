@@ -21,7 +21,7 @@ public class UserService {
     public User findById(Long id){
         return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("Not found"));
     }
-    public User findByEmail(String email) {
+    public User findByEmail(String email){
         return userRepository.findUserByEmail(email).get();
     }
 
