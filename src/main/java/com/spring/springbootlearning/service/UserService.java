@@ -13,6 +13,10 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepository;
 
+    public Boolean existUserByEmail(String email) {
+        return userRepository.existsUserByEmail(email);
+    }
+
     public List<User> users(){ // Виводить усіх Юзерів
         return userRepository.findAllByOrderByIdAsc();
     }
@@ -21,11 +25,8 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("Not found"));
     }
 
+
     public User findByEmail(String email){
         return userRepository.findUserByEmail(email).get();
-    }
-
-    public Boolean existUserByEmail(String email) {
-        return userRepository.existsUserByEmail(email);
     }
 }
