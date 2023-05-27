@@ -13,20 +13,20 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepository;
 
-    public Boolean existUserByEmail(String email) {
-        return userRepository.existsUserByEmail(email);
+    public User findById(Long id){
+        return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("Not found"));
+    }
+
+    public User findByEmail(String email){
+        return userRepository.findUserByEmail(email).get();
     }
 
     public List<User> users(){ // Виводить усіх Юзерів
         return userRepository.findAllByOrderByIdAsc();
     }
 
-    public User findById(Long id){
-        return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("Not found"));
+    public Boolean existUserByEmail(String email) {
+        return userRepository.existsUserByEmail(email);
     }
 
-
-    public User findByEmail(String email){
-        return userRepository.findUserByEmail(email).get();
-    }
 }
