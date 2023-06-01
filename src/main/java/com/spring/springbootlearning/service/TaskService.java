@@ -27,8 +27,16 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task findById(Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Task with id " + id + " not found"));
+        public Task findById(Long id) {
+            return taskRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Task with id " + id + " not found"));
+        }
+
+    public void deleteById(Long id) {
+        try {
+            taskRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Task> search(TaskSearchValues taskSearchValues) {
@@ -41,11 +49,5 @@ public class TaskService {
         return taskRepository.findByParams(title, completed, priorityID, categoryId);
     }
 
-    public void deleteById(Long id) {
-        try {
-            taskRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            e.printStackTrace();
-        }
-    }
 }
+

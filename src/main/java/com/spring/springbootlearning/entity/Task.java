@@ -1,10 +1,7 @@
 package com.spring.springbootlearning.entity;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -14,6 +11,7 @@ import java.sql.Date;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode
+
 public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,6 +34,7 @@ public class Task {
     private Category category;
 
 //    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_id", nullable = false)
 //    private User user;
 
 }

@@ -2,6 +2,7 @@ package com.spring.springbootlearning.entity;
 
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Setter
+@Getter
 @EqualsAndHashCode
 public class Stat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +25,4 @@ public class Stat {
     @Column(name = "uncompleted_total")
     private Long uncompletedTotal;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getCompletedTotal() {
-        return completedTotal;
-    }
-
-    public Long getUncompletedTotal() {
-        return uncompletedTotal;
-    }
 }

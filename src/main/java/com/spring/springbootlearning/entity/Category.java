@@ -2,6 +2,7 @@ package com.spring.springbootlearning.entity;
 
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @EqualsAndHashCode
 @Setter
+@Getter
 @NoArgsConstructor
 public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +27,5 @@ public class Category {
     @Basic
     @Column(name = "uncompleted_count")
     private Long uncompletedCount;
-    public Long getId() {
-        return id;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public Long getCompletedCount() {
-        return completedCount;
-    }
-    public Long getUncompletedCount() {
-        return uncompletedCount;
-    }
+
 }

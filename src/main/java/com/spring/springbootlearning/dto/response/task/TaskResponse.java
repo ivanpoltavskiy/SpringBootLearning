@@ -22,4 +22,5 @@ public class TaskResponse {
     private Priority priority;
     @NotNull(message ="Category cannot be null" )
     private Category category;
+    private Long userId;
 }

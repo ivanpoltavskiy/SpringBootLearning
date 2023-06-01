@@ -32,10 +32,10 @@ public class TaskController {
         return new ResponseEntity<>(taskMapper.toDto(taskService.add(taskMapper.fromDto(taskDto))), HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<TaskResponse> update(@Valid @RequestBody TaskCreateRequest taskDto) {
-        return new ResponseEntity<>(taskMapper.toDto(taskService.update(taskMapper.fromDto(taskDto))), HttpStatus.OK);
-    }
+        @PutMapping("/update")
+        public ResponseEntity<TaskResponse> update(@Valid @RequestBody TaskCreateRequest taskDto) {
+            return new ResponseEntity<>(taskMapper.toDto(taskService.update(taskMapper.fromDto(taskDto))), HttpStatus.OK);
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<TaskResponse> findById(@Valid @PathVariable Long id) {
