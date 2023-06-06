@@ -22,4 +22,5 @@ public class TaskCreateRequest {
     private Priority priority;
     @NotNull(message ="Category cannot be null" )
     private Category category;
+
 }

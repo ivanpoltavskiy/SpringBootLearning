@@ -6,6 +6,8 @@ import com.spring.springbootlearning.repository.TaskRepository;
 import com.spring.springbootlearning.search.TaskSearchValues;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class TaskService {
     private TaskRepository taskRepository;
+    private UserService userService;
 
     public List<Task> tasks() {
         return taskRepository.findAll();
     }
 
     public Task add(Task task) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication);
+        task.setUser(userService.findByEmail(authentication.getName()));
         return taskRepository.save(task);
     }
 
@@ -36,6 +42,7 @@ public class TaskService {
             taskRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
+
         }
     }
 

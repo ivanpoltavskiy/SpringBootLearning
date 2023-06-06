@@ -37,7 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler({UserNotFoundException.class, PriorityNotFoundException.class, CategoryNotFoundException.class, RuntimeException.class})
+    @ExceptionHandler({UserNotFoundException.class, PriorityNotFoundException.class, CategoryNotFoundException.class, UserIsExistException.class, RuntimeException.class})
     public ResponseEntity<Map<String, List<String>>> handleNotFoundException(RuntimeException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);

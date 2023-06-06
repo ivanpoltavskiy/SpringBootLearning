@@ -15,6 +15,8 @@ import java.util.List;
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
+
+
     public List<Category> categories() {
         return categoryRepository.findAllByOrderByIdAsc();
     }

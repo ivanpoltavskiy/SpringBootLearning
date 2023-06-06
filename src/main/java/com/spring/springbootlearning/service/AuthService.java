@@ -1,6 +1,7 @@
 package com.spring.springbootlearning.service;
 
 import com.spring.springbootlearning.entity.User;
+import com.spring.springbootlearning.exceptions.UserIsExistException;
 import com.spring.springbootlearning.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +29,7 @@ public class AuthService {
 
     public User register(User register) {
         if (userService.existUserByEmail(register.getEmail())) {
-            throw new RuntimeException("User is existed");
+            throw new UserIsExistException("User is existed");
         }
         register.setPassword(passwordEncoder.encode(register.getPassword()));
         return userRepository.save(register);

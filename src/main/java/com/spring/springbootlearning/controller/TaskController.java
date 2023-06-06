@@ -28,7 +28,7 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<TaskResponse> add(@Valid @RequestBody TaskCreateRequest taskDto) {
+    public ResponseEntity<TaskResponse> add(@Valid @RequestBody  TaskCreateRequest taskDto) {
         return new ResponseEntity<>(taskMapper.toDto(taskService.add(taskMapper.fromDto(taskDto))), HttpStatus.OK);
     }
 

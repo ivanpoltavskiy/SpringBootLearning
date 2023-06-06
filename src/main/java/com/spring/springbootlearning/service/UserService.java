@@ -4,6 +4,7 @@ import com.spring.springbootlearning.entity.User;
 import com.spring.springbootlearning.exceptions.UserNotFoundException;
 import com.spring.springbootlearning.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class UserService {
         return userRepository.findAllByOrderByIdAsc();
     }
 
-    public User findById(Long id){
+    public User findUserById(Long id){
         return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("Not found"));
     }
     public User findByEmail(String email) {
@@ -27,5 +28,10 @@ public class UserService {
 
     public Boolean existUserByEmail(String email) {
         return userRepository.existsUserByEmail(email);
+    }
+
+    public String getAuthUser(Authentication authentication){
+        System.out.println(authentication);
+        return authentication.getName();
     }
 }
