@@ -1,18 +1,15 @@
 package com.spring.springbootlearning.entity;
 
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Builder
+
 @Entity
-@AllArgsConstructor
-@EqualsAndHashCode
-@Setter
-@NoArgsConstructor
-@Getter
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +18,7 @@ public class User {
     private String name;
     private String lastName;
     private String password;
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @OneToMany
+    @JsonIgnore
     private Set<Task> tasks;
 }

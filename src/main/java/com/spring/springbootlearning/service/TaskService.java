@@ -24,12 +24,13 @@ public class TaskService {
 
     public Task add(Task task) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
         task.setUser(userService.findByEmail(authentication.getName()));
         return taskRepository.save(task);
     }
 
     public Task update(Task task) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        task.setUser(userService.findByEmail(authentication.getName()));
         return taskRepository.save(task);
     }
 

@@ -1,19 +1,14 @@
 package com.spring.springbootlearning.entity;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@EqualsAndHashCode
+@Data
+
 
 public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +21,8 @@ public class Task {
     private Priority priority;
     @ManyToOne
     private Category category;
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name ="user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name ="user_id")
     private User user;
 
 
